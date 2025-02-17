@@ -1,3 +1,5 @@
+//==================VARIÁVEIS BÁSICAS=======================\\
+
 // Lista para armazenar os números já sorteados, evitando repetições
 let listaDeNumerosSorteados = [];
 
@@ -7,22 +9,30 @@ let numeroLimite = 10;
 // Variável que armazena o número secreto gerado pela função gerarNumeroAleatorio()
 let numeroSecreto = gerarNumeroAleatorio();
 
+// Variável responsável por controlar a dificuldade do jogo
+let dificuldade = 1;
+
 // Variável que conta o número de tentativas do usuário
 let tentativas = 1;
 
+
+//===================ELEMENTOS VISUAIS=====================\\
+
+background = document.querySelector('body');
+//==================FUNÇÔES====================\\
 // Função que exibe um texto na tela, recebe a tag HTML e o texto que será exibido
 function exibirTextoNaTela(tag, texto) {
     // Seleciona o elemento HTML com base na tag passada como parâmetro
     let campo = document.querySelector(tag);
     // Altera o conteúdo do elemento selecionado para o texto passado como parâmetro
-    campo.innerHTML = texto;
-    responsiveVoice.speak(texto, 'Brazilian Portuguese Female', { rate: 1.2 });
-}
+        campo.innerHTML = texto;
+    }
+    
 
 // Função que exibe a mensagem inicial do jogo
 function exibirMensagemInicial() {
     exibirTextoNaTela('h1', 'Jogo do número secreto');
-    exibirTextoNaTela('p', 'Escolha um número entre 1 e 10.');
+    exibirTextoNaTela('p', 'Escolha um número entre 1 e ' + numeroLimite);
 }
 
 // Exibe a mensagem inicial ao carregar o jogo
@@ -112,4 +122,13 @@ function reiniciarJogo() {
     exibirMensagemInicial();
     // Desabilita o botão de reiniciar o jogo
     document.getElementById('reiniciar').setAttribute('disabled', true);
+}
+
+function trocarDificuldade(arrow){
+    if(arrow == 'left'){
+        dificuldade = dificuldade - 1;
+    }
+    else if(arrow == 'right'){
+        dificuldade = dificuldade + 1;
+    }
 }
